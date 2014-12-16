@@ -18,12 +18,12 @@ describe APN::Notification do
       let(:payload) { "hi" }
 
       it "adds 'aps' key" do
-        expect(ActiveSupport::JSON::decode(message)).to have_key('aps')
+        expect(ActiveSupport::JSON.decode(message)).to have_key('aps')
       end
 
       it "encode the payload" do
         expect(message)
-          .to eq(ActiveSupport::JSON::encode(aps: {alert: payload}))
+          .to eq(ActiveSupport::JSON.encode(aps: {alert: payload}))
       end
     end
 
@@ -33,12 +33,12 @@ describe APN::Notification do
       end
 
       it "adds 'aps' key" do
-        expect(ActiveSupport::JSON::decode(message)).to have_key('aps')
+        expect(ActiveSupport::JSON.decode(message)).to have_key('aps')
       end
 
       it "encode the payload" do
         expect(message)
-          .to eq(ActiveSupport::JSON::encode(aps: payload))
+          .to eq(ActiveSupport::JSON.encode(aps: payload))
       end
     end
 
@@ -60,7 +60,7 @@ describe APN::Notification do
 
         it "adds to the message" do
           expect(message)
-            .to eq(ActiveSupport::JSON::encode(aps: {'content-available' => 1}))
+            .to eq(ActiveSupport::JSON.encode(aps: {'content-available' => 1}))
         end
       end
     end

@@ -39,7 +39,9 @@ describe APN::Client do
       end
 
       it "tries to connect using default host and port" do
-        TCPSocket.should_receive(:new).with(APN::Client::DEFAULTS[:host], APN::Client::DEFAULTS[:port])
+        tcp_socket = TCPSocket.should_receive(:new).
+          with(APN::Client::DEFAULTS[:host], APN::Client::DEFAULTS[:port]).and_return(tcp_socket)
+        tcp_socket.stub(:setsockopt)
         OpenSSL::SSL::SSLSocket.should_receive(:new).and_return(socket)
         socket.stub(:sync=)
         socket.stub(:connect)
@@ -55,7 +57,9 @@ describe APN::Client do
       end
 
       it "tries to connect using default host and port" do
-        TCPSocket.should_receive(:new).with(APN::Client::DEFAULTS[:host], APN::Client::DEFAULTS[:port])
+        tcp_socket = TCPSocket.should_receive(:new).
+          with(APN::Client::DEFAULTS[:host], APN::Client::DEFAULTS[:port]).and_return(tcp_socket)
+        tcp_socket.stub(:setsockopt)
         OpenSSL::SSL::SSLSocket.should_receive(:new).and_return(socket)
         socket.stub(:sync=)
         socket.stub(:connect)
