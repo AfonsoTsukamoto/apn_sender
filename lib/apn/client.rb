@@ -19,7 +19,7 @@ module APN
         APN.log(:error, "Error on message: #{error}")
         return false
       end
-      APN.log(:debug, "Message sent.")
+      APN.log(:debug, "Message sent (#{message.token}) : #{message.options.alert} ")
       true
     rescue OpenSSL::SSL::SSLError, Errno::EPIPE, Errno::ETIMEDOUT => e
       APN.log(:error, "[##{self.object_id}] Exception occurred: #{e.inspect}, socket state: #{socket.inspect}")
