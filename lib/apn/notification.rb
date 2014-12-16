@@ -85,7 +85,7 @@ module APN
     private
 
       def payload(hash)
-        str = ActiveSupport::JSON::encode(hash)
+        str = ActiveSupport::JSON.encode(hash)
 
         if APN.truncate_alert && str.bytesize > DATA_MAX_BYTES
           if hash['aps']['alert'].is_a?(Hash)
@@ -103,7 +103,7 @@ module APN
           else
             hash['aps']['alert'] = alert
           end
-          str = ActiveSupport::JSON::encode(hash)
+          str = ActiveSupport::JSON.encode(hash)
         end
         str
       end
