@@ -1,7 +1,7 @@
 module APN
   class Client
 
-    DEFAULTS = {port: 2195, host: "gateway.push.apple.com"}
+    DEFAULTS = { port: 2195, host: "gateway.push.apple.com" }
 
     def initialize(options = {})
       options = DEFAULTS.merge options.reject{|k,v| v.nil?}
@@ -19,7 +19,6 @@ module APN
         APN.log(:error, "Error on message: #{error}")
         return false
       end
-
       APN.log(:debug, "Message sent.")
       true
     rescue OpenSSL::SSL::SSLError, Errno::EPIPE, Errno::ETIMEDOUT => e
