@@ -49,6 +49,9 @@ module APN
       APN.log(:debug, "Connecting to #{@host}:#{@port}...")
 
       socket_tcp = TCPSocket.new(@host, @port)
+      socket_tcp.setsockopt(Socket::SOL_SOCKET, Socket::SO_KEEPALIVE, 1)
+      socket_tcp.setsockopt(Socket::IPPROTO_TCP, Socket::TCP_NODELAY, 1)
+
       OpenSSL::SSL::SSLSocket.new(socket_tcp, ctx).tap do |s|
         s.sync = true
         s.connect
