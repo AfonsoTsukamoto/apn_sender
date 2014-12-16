@@ -39,6 +39,10 @@ module APN
       packaged_message.bytesize
     end
 
+    def inspect
+      "#{token} : #{options}"
+    end
+
     # Ensures at least one of <code>%w(alert badge sound)</code> is present
     def valid?
       return true if [:alert, :badge, :sound].any?{|key| options.keys.include?(key) }
